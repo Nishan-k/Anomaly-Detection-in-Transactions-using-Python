@@ -34,6 +34,7 @@ There are no any NULL values:
 
 #### 3.2 Checking for information about the data:
 ![alt text](images/image3.png)
+
 All the data types seems correct, so we don't need to change anything here either.
 
 
