@@ -12,11 +12,7 @@ Fraudlent behavior in online transaction has significanlty increased as people a
 <li><a href="#Overview"><b> Overview </a></b></li>
 <li><a href="#Datasets"><b> Datasets </a></b></li>
 <li><a href="#EDA"><b> Exploratory Data Analysis </a></b></li>
-<li><a href="#featureengineering"><b> Feature Engineering </a></b></li>
-<li><a href="#summary"><b> Summary Till Now </a></b></li>
-<li><a href="#tuning"><b> Model Tuning </a></b></li>
-<li><a href="#finalization"><b> Model Finalization </a></b></li>
-<li><a href="#saveload"><b> Saving & Loading the Model </a></b></li>
+<li><a href="#BuildingModel"><b> Building Model </a></b></li>
 <li><a href="#conclusion"><b> Conclusion </a></b></li>
 </ol>
 
@@ -58,3 +54,52 @@ We have two types of accounts:
 
 #### 3.4 Visualizing the Transaction Amount by the account type:
 ![alt text](images/image5.png)
+
+
+#### 3.5 Visualizing the average transaction amount by age and the account type:
+![alt text](images/image6.png)
+
+It seems like there is no any difference in the average transaction by age.
+
+#### 3.6 Let's visualize the total number of transactions per day of the week:
+First, we will group the data based on the days of the week and count them. 
+The resulting table looks like below:
+![alt text](images/image7.png)
+
+
+And when visualized, it looks like below, which doesn't show too much variance:
+![alt text](images/image8.png)
+
+
+
+Since, its hard to detect the anomaly based on visual inspection, we will use the **Empirical Rule**
+to define the anomaly.
+For, this I have created a funciton, that will take the amount and classify whether its an anomaly or not
+based on sigma_limit.
+
+`sigma_limit` Function for Anomaly Detection:
+
+This function detects anomalies in transaction amounts using the sigma limit method, based on the Empirical Rule (68-95-99.7 Rule). It identifies transactions that fall outside a defined threshold of standard deviations from the mean.
+
+Functionality:
+The function calculates the mean and standard deviation of the Transaction_Amount column in the dataset.
+It then flags transactions as anomalies if the amount is greater than the mean plus sigma times the standard deviation or less than the mean minus sigma times the standard deviation.
+Anomalous transactions are labeled with a new column Is_Anomaly (True for anomalies, False for normal transactions).
+The function also generates a scatter plot, visually indicating anomalies, with the total count of flagged anomalies displayed in the title.
+
+So, the resulting graph would look like this:
+
+![alt text](images/image9.png)
+
+Now, since we have defined a threshold, and have flagged the transaction as anomaly or not, we will use these data to build the machine learning model.
+
+
+<h2 id="BuildingModel">4. Building The Model</h2>
+
+
+Now, we will use that dataset where we have now column whether a transaction is 
+an anomaly or not to train the Isolation Forest model.
+So, for this out of all the columns, for independent features, we will 
+use ` ['Transaction_Amount', 'Transaction_Volume',  'Average_Transaction_Amount', 'Frequency_of_Transactions']`
+and 
+`[Is_Anomaly]`as the target/dependent variable which we derived from the function we created.
