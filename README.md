@@ -89,6 +89,11 @@ Anomalous transactions are labeled with a new column Is_Anomaly (True for anomal
 The function also generates a scatter plot, visually indicating anomalies, with the total count of flagged anomalies displayed in the title.
 Here, we can pass the value of sigma as a parameter. 
 
+
+
+The function looks like below, where the default value of sigma is set to 2:
+![alt text](images/image13.png)
+
 So, the resulting graph would look like this when sigma=3:
 
 ![alt text](images/image9.png)
