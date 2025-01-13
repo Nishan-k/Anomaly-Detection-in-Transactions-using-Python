@@ -13,7 +13,7 @@ Fraudlent behavior in online transaction has significanlty increased as people a
 <li><a href="#Datasets"><b> Datasets </a></b></li>
 <li><a href="#EDA"><b> Exploratory Data Analysis </a></b></li>
 <li><a href="#BuildingModel"><b> Building Model </a></b></li>
-<li><a href="#conclusion"><b> Conclusion </a></b></li>
+<li><a href="#Evaluating"><b> Model Evaluation </a></b></li>
 </ol>
 
 
@@ -120,3 +120,36 @@ the proportion of the dataset that we would expect to be anomalies.
 `model.fit(X_train, y_train)`
 
 ![alt text](images/image10.png)
+
+
+And finally, we would make a prediction on the X_test dataset whose results would be 
+-1 and 1 where:
+
+**-1 is anomaly 1 is a normal transaction**
+
+So, again we will loop through the prediction and set -1 as 1 and 1 as 1 as 0 for the
+readability.
+
+
+
+<h2 id="Evaluating">5. Model Evaluation</h2>
+
+![alt text](images/image11.png)
+
+
+
+And finally we can implement this model by taking inputs from the user.
+The model will ask for the input for the 4 features that were used to train
+the model and then the model would predict on it.
+
+The prediction values will be either -1 or 1, we will convert it to either
+1 for -1 or 0 if it is 1.
+Then finally we will use if statement to check the predicted values, 
+if it is 1 then we would display the message it is anomaly
+else a normal transaction like below.
+
+![alt text](images/image12.png)
+
+
+
+
