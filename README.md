@@ -86,8 +86,9 @@ The function calculates the mean and standard deviation of the Transaction_Amoun
 It then flags transactions as anomalies if the amount is greater than the mean plus sigma times the standard deviation or less than the mean minus sigma times the standard deviation.
 Anomalous transactions are labeled with a new column Is_Anomaly (True for anomalies, False for normal transactions).
 The function also generates a scatter plot, visually indicating anomalies, with the total count of flagged anomalies displayed in the title.
+Here, we can pass the value of sigma as a parameter. 
 
-So, the resulting graph would look like this:
+So, the resulting graph would look like this when sigma=3:
 
 ![alt text](images/image9.png)
 
@@ -103,3 +104,19 @@ So, for this out of all the columns, for independent features, we will
 use ` ['Transaction_Amount', 'Transaction_Volume',  'Average_Transaction_Amount', 'Frequency_of_Transactions']`
 and 
 `[Is_Anomaly]`as the target/dependent variable which we derived from the function we created.
+
+
+Now,I will take these dependent and independent features and perform a 
+`train_test_split` and then train the model as:
+
+
+
+**NOTE:** Earlier, the sigma_limit function flagged 20 rows as anomaly out of 1000 rows, 
+so that is the reason, we are setting contamination parameter as 2%  that would represent
+the proportion of the dataset that we would expect to be anomalies.
+
+
+`model = IsolationForest(contamination=0.02, random_state=42)`
+`model.fit(X_train, y_train)`
+
+![alt text](images/image10.png)
